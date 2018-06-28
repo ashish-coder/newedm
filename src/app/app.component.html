@@ -1,0 +1,723 @@
+<div id="header">
+<h1 id="logo">EDM</h1>
+
+<!-- Employee Code -->
+<div class="input-group input-group-sm mb-3 ecode1">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-sm">Employee Code</span>
+  </div>
+  <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" (click)="ecode()">
+</div>
+
+<div class="input-group input-group-sm mb-3 ecode2" style="margin-right: 495px !important;">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-sm">Email Address</span>
+  </div>
+  <input type="text" class="form-control" id="email" aria-label="Small" aria-describedby="inputGroup-sizing-sm" disabled="You">
+</div>
+<!-- Employee Code -->
+<ul id="nav">
+
+    <li id="nav_2">
+
+      <div class="btn-group">
+  <button type="button" class="btn btn-secondary dropdown-toggle nav_q" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   Help
+  </button>
+  <div class="dropdown-menu dropdown-menu-right">
+    <button class="dropdown-item" type="button">CSV</button>
+    <button class="dropdown-item" type="button">Template</button>
+   
+  </div>
+</div>
+      
+   </li>
+<!--
+   <li id="nav_2"><a href="#" class="nav_a">Logout</a></li>-->
+</ul>
+</div>
+
+
+
+<!--
+ <div class="text-center login_d" [hidden]="loginhide">
+<form class="form-signin">
+
+    <label for="inputEmail" class="sr-only">Employee id</label>
+
+    <input type="text" id="inputEmail" class="form-control employ" placeholder="Employee id" required="" autofocus="">
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="shownextpage()">Sign in</button>
+
+
+</form>
+
+
+</div>
+
+
+-->
+
+
+
+
+
+
+<div class="alert alert-warning" role="alert">
+  If you have more than 10 form data then upload through <a class="alert-link">Bulk Upload</a>.
+</div>
+ <div *ngIf="datajson.length >= 10 " >
+       <div class="alert alert-danger" role="alert" >You cannot upload more than 10 form data, use <a class="alert-link">Bulk Upload</a> to upload data in bulk.
+</div>  
+</div>
+
+<div id="content">
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" (click)="showme()">Position Form</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" (click)="hideme()">Bulk Upload</a>
+  </li>
+ 
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <div class="viewclass data-show" >
+
+
+    
+
+
+
+    </div>
+
+
+
+
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    
+
+
+
+<form id="form">
+  <input type="file" multiple>
+  <p>Drag your files here or click in this area.</p>
+  <h1 id="fname">Files Name</h1>
+  <button type="submit">Upload</button>
+</form>
+
+<!-- 
+    <div class="panel-heading" *ngFor="let item of files; let i=index" style="margin-top: 10px;">{{item.relativePath}}</div> -->
+  <!--   <div class="upload-table" [hidden]="tabledatahide" style="margin-top: 50px;margin-left: -370px;width:90%;">
+    <table class="table-bordered">
+        <thead>
+        <tr>
+            <th>Positon Id</th>
+            <th>Effective date</th>
+            <th  >status</th>
+            <th>Legal entity</th>
+            <th style="background-color: red;">bussiness unit</th>
+            <th>lob/segment</th>
+            <th>vertical</th>
+            <th>sub vertical</th>
+            <th>cost center</th>
+            <th>geozone</th>
+            <th>facility</th>
+            <th>employee class</th>
+            <th>employee type</th>
+            <th>job family</th>
+            <th>job code</th>
+            <th>internal specilization</th>
+            <th>variable pay</th>
+            <th>reporting manager</th>
+            <th>bu hr spoc</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let person of datajson">
+            <td>{{person.positionid}}</td>
+            <td>{{person.effectivedate}}</td>
+            <td>{{person.status}}</td>
+            <td>{{person.legalentity}}</td>
+            <td style="background-color: red;">{{person.positionid}}</td>
+            <td>{{person.effectivedate}}</td>
+            <td  >{{person.status}}</td>
+            <td>{{person.legalentity}}</td>
+            <td>{{person.positionid}}</td>
+            <td>{{person.effectivedate}}</td>
+            <td>{{person.status}}</td>
+            <td>{{person.legalentity}}</td>
+            <td>{{person.positionid}}</td>
+            <td>{{person.effectivedate}}</td>
+            <td>{{person.status}}</td>
+            <td>{{person.legalentity}}</td>
+            <td>{{person.positionid}}</td>
+            <td>{{person.effectivedate}}</td>
+            <td>{{person.status}}</td>
+
+
+        </tr>
+        </tbody>
+    </table>
+    </div>
+   -->
+<!-- 
+   <table class="table table-bordered">
+  <thead>
+    <tr>
+
+        <th scope="col">Positon Id</th>
+            <th scope="col">Effective date</th>
+            <th scope="col" >status</th>
+            <th scope="col">Legal entity</th>
+            <th scope="col">bussiness unit</th>
+            <th scope="col">lob/segment</th>
+            <th scope="col">vertical</th>
+            <th scope="col">sub vertical</th>
+            <th scope="col">cost center</th>
+            <th scope="col">geozone</th>
+            <th scope="col">facility</th>
+            <th scope="col">employee class</th>
+            <th scope="col">employee type</th>
+            <th scope="col">job family</th>
+            <th scope="col">job code</th>
+            <th scope="col">internal specilization</th>
+            <th scope="col">variable pay</th>
+            <th scope="col">reporting manager</th>
+            <th scope="col">bu hr spoc</th>
+      
+     
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr  scope="row">
+            <td>{{person.positionid}}</td>
+            <td>{{person.effectivedate}}</td>
+            <td>{{person.status}}</td>
+            <td>{{person.legalentity}}</td>
+            <td>{{person.positionid}}</td>
+            <td>{{person.effectivedate}}</td>
+            <td  >{{person.status}}</td>
+            <td>{{person.legalentity}}</td>
+            <td>{{person.positionid}}</td>
+            <td>{{person.effectivedate}}</td>
+            <td>{{person.status}}</td>
+            <td>{{person.legalentity}}</td>
+            <td>{{person.positionid}}</td>
+            <td>{{person.effectivedate}}</td>
+            <td>{{person.status}}</td>
+            <td>{{person.legalentity}}</td>
+            <td>{{person.positionid}}</td>
+            <td>{{person.effectivedate}}</td>
+            <td>{{person.status}}</td>
+            <td>Test</td>
+            <td>Test</td>
+            <td>Test</td>
+            <td>Test</td>
+            <td>Test</td>
+            <td>Test</td>
+            <td>Test</td>
+            <td>Test</td>
+            <td>Test</td>
+            <td>Test</td>
+            <td>Test</td>
+            <td>Test</td>
+            <td>Test</td>
+            <td>Test</td>
+            <td>Test</td>
+            <td>Test</td>
+            <td>Test</td>
+            <td>Test</td>
+            <td>Test</td>
+
+        </tr>
+  </tbody>
+</table> -->
+</div>
+
+<!-- bulk  -->
+
+  </div>
+
+
+</div>
+
+<!--
+<div id="show_id">
+</div>
+-->
+<!--  -->
+<div *ngIf="datajson.length < 10 ">
+    <!--<button type="button"(click)="display()" class="btn btn-secondary">Add</button>-->
+</div>
+<div *ngIf="datajson.length >= 10 ">
+<div class="alert alert-danger" id="ad" role="alert">
+  You Cannot Upload More Than 10 Form Data Here, Try To Upload Form Data in <a href="#" class="alert-link">Bulk Section</a>
+</div>
+<!--<img src="../assets/img/a.png"  id="ak_img" (click)="display()" />
+<img src="../assets/img/a.png"  id="ak_img" data-toggle="modal" href="#myModal" />-->
+
+
+
+
+</div>
+<!--<div id="showposition">
+<div  class="alert alert-primary" role="alert"
+      *ngFor="let dataprint of datajson; let i = index" >
+    <div *ngIf="i < 10">
+
+        Position ID : {{dataprint.positionid}}
+    </div>
+
+</div>
+</div>-->
+<!-- 
+New Form Here
+-->
+
+<div class="accordion" id="accordionExample">
+    <form #form="ngForm" novalidate id="showform" >
+   
+  <div class="card">
+    <div class="card-header" id="headingSixe" style="    background-color: #5f5a5cba;">
+      <h5 class="mb-0">
+        <button class="btn btn-link nounder collapsed" type="button" data-toggle="collapse" data-target="#collapseSixe" aria-expanded="false" aria-controls="collapseSixe">
+         Position ID
+        </button>
+      </h5>
+    </div>
+    <div id="collapseSixe" class="collapse" aria-labelledby="headingSixe" data-parent="#accordionExample">
+      <div class="card-body">
+      
+<div id="showposition">
+<div  class="alert alert-primary" role="alert"
+      *ngFor="let dataprint of datajson; let i = index" >
+    <div *ngIf="i < 10">
+
+        Position ID : {{dataprint.positionid}}
+        <button type="button" (click)="onedit(dataprint)">
+            Edit
+        </button>
+    </div>
+
+</div>
+</div>
+    
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link nounder" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Position Section
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+
+
+<!-- -->
+
+  <div class="row">
+    <div class="col">
+       <label for="formGroupExampleInput">Position ID*</label>
+      <input type="text"
+             name="positionid"
+             [ngModel]="positionidvar"
+             class="form-control" placeholder="Position ID">
+    </div>
+    <div class="col">
+       <label for="formGroupExampleInput">Effective Date*</label>
+      <input type="date"
+             name="effectivedate"
+
+             [ngModel]="effectivedatevar"
+             class="form-control" placeholder="Effective Date">
+    </div> 
+    <div class="col">
+       <label for="formGroupExampleInput">Status*</label>
+      <input type="text"
+             name="status"
+
+             [ngModel]="statusvar"
+             class="form-control" placeholder="Status">
+    </div>
+  </div>
+  <br>
+  <div class="row">
+  <div class="col">
+<button type="button" class="btn btn-secondary next" data-toggle="collapse" data-target="#collapseTwo">Next</button>
+    </div>   
+
+  
+  </div>
+
+
+<!-- -->
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link nounder collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          5 Level Hierarchy & Cost Center
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+       
+
+<!-- -->
+
+  <div class="row">
+    <div class="col">
+       <label for="formGroupExampleInput">Legal Entity*</label>
+      <input type="text"
+             name="legalentity"
+
+             [ngModel]="legalentityvar"
+             class="form-control" placeholder="Legal Entity">
+    </div>
+    <div class="col">
+       <label for="formGroupExampleInput">Business Unit/SSU*</label>
+      <input type="text"
+             name="bussinessunit"
+
+             [ngModel]="bussinessunitvar"
+             class="form-control" placeholder="Business Unit/SSU">
+    </div> 
+     <div class="col">
+       <label for="formGroupExampleInput">LOB/Segment*</label>
+      <input type="text"
+             name="lobsegment"
+
+             [ngModel]="lobsegmentvar"class="form-control" placeholder="Business Unit/SSU">
+    </div>
+  </div>
+  <br>
+  <div class="row">
+      <div class="col">
+       <label for="formGroupExampleInput">Vertical*</label>
+      <input type="text"
+             name="vertical"
+
+             [ngModel]="verticalvar"
+             class="form-control" placeholder="Vertical">
+    </div>  
+    <div class="col">
+       <label for="formGroupExampleInput">Sub Vertical*</label>
+      <input type="text"
+             name="subvertival"
+
+             [ngModel]="subvertivalvar"
+             class="form-control" placeholder="Sub Vertical">
+    </div>  
+    <div class="col">
+       <label for="formGroupExampleInput">Cost Center*</label>
+      <input type="text"
+             name="costcenter"
+
+             [ngModel]="costcentervar"class="form-control" placeholder="Cost Center">
+    </div>
+  </div>
+
+<!--   <div class="row" >
+    <div class="col">
+ <div class="form-group">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="gridCheck">
+      <label class="form-check-label" for="gridCheck">
+        Check me out
+      </label>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+<form>
+  <div class="form-group">
+  
+    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+  </div>
+</form>
+</div>
+
+  </div>
+ -->
+ <br>
+  <div class="row">
+  <div class="col">
+
+<button type="button" class="btn btn-secondary next" data-toggle="collapse" data-target="#collapseThree">Next</button>
+    <button type="button" class="btn btn-light back" data-toggle="collapse" data-target="#collapseOne">Back</button>
+    </div>  
+    
+
+  
+  </div>
+
+
+<!-- -->
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link nounder collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+         Geozone & Facility
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+      
+
+<!-- -->
+
+  <div class="row">
+    <div class="col">
+       <label for="formGroupExampleInput">Geozone*</label>
+      <input type="text"
+             name="Geozone"
+
+             [ngModel]="Geozonevar"
+             class="form-control" placeholder="Geozone">
+    </div>
+    <div class="col">
+       <label for="formGroupExampleInput">Facility*</label>
+      <input type="text"
+             name="facility"
+
+             [ngModel]="facilityvar"
+             class="form-control" placeholder="Facility">
+    </div>
+  </div>
+   <br>
+  <div class="row">
+  <div class="col">
+<button type="button" class="btn btn-secondary next" data-toggle="collapse" data-target="#collapseFour">Next</button>
+ <button type="button" class="btn btn-light back" data-toggle="collapse" data-target="#collapseTwo">Back</button>
+    </div>   
+
+  
+  </div>
+
+
+<!-- -->
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header" id="headingFour">
+      <h5 class="mb-0">
+        <button class="btn btn-link nounder collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+         Employee Class & Type
+        </button>
+      </h5>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+      <div class="card-body">
+      
+
+<!-- -->
+
+  <div class="row">
+    <div class="col">
+       <label for="formGroupExampleInput">Employee Class*</label>
+      <input type="text"
+             name="employeeclass"
+
+             [ngModel]="employeeclassvar"
+             class="form-control" placeholder="Employee Class">
+    </div>
+    <div class="col">
+       <label for="formGroupExampleInput">Employee Type*</label>
+      <input type="text"
+             name="employeetype"
+
+             [ngModel]="employeetypevar"
+             class="form-control" placeholder="Employee Type">
+    </div>
+  </div>
+   <br>
+  <div class="row">
+  <div class="col">
+<button type="button" class="btn btn-secondary next" data-toggle="collapse" data-target="#collapseFive">Next</button>
+ <button type="button" class="btn btn-light back" data-toggle="collapse" data-target="#collapseThree">Back</button>
+    </div>   
+
+  
+  </div>
+
+
+<!-- -->
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header" id="headingFive">
+      <h5 class="mb-0">
+        <button class="btn btn-link nounder collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+         Global Work Levels & Variable Pay Plan Type
+        </button>
+      </h5>
+    </div>
+    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+      <div class="card-body">
+      
+
+<!-- -->
+
+  <div class="row">
+    <div class="col">
+       <label for="formGroupExampleInput">Job Family*</label>
+      <input type="text"
+             name="jobfamily"
+
+             [ngModel]="jobfamilyvar"
+             class="form-control" placeholder="Job Family">
+    </div>
+    <div class="col">
+       <label for="formGroupExampleInput">Job Code*</label>
+      <input type="text"
+             name="Jobcode"
+
+             [ngModel]="Jobcodevar"
+             class="form-control" placeholder="Job Code">
+    </div>
+  </div>
+  <br>
+   <div class="row">
+    <div class="col">
+       <label for="formGroupExampleInput">Internal Specilization*</label>
+      <input type="text"
+             name="internalspecilization"
+
+             [ngModel]="internalspecilizationvar"
+             class="form-control" placeholder="Internal Specilization">
+    </div>
+    <div class="col">
+       <label for="formGroupExampleInput">Variable Pay Plan Type*</label>
+      <input type="text"
+             name="variablepaytype"
+
+             [ngModel]="variablepaytypevar"
+             class="form-control" placeholder="Variable Pay Plan Type">
+    </div>
+  </div>
+   <br>
+  <div class="row">
+  <div class="col">
+
+<button type="button" class="btn btn-secondary next" data-toggle="collapse" data-target="#collapseSix">Next</button>
+ <button type="button" class="btn btn-light back" data-toggle="collapse" data-target="#collapseFour">Back</button>
+    </div>   
+
+  
+  </div>
+
+
+<!-- -->
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header" id="headingSix">
+      <h5 class="mb-0">
+        <button class="btn btn-link nounder collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+         Reporting Manager
+        </button>
+      </h5>
+    </div>
+    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+      <div class="card-body">
+      
+
+<!-- -->
+
+  <div class="row">
+    <div class="col">
+       <label for="formGroupExampleInput">Reporting Manager*</label>
+      <input type="text"
+             name="reportingmanager"
+
+             [ngModel]="reportingmanagervar"
+             class="form-control" placeholder="Reporting Manager">
+    </div>
+    <div class="col">
+       <label for="formGroupExampleInput">BU HR  SPOC*</label>
+      <input type="text"
+             name="buhrspoc"
+
+             [ngModel]="buhrspocvar"
+             class="form-control" placeholder="BU HR  SPOC">
+    </div>
+  </div>
+
+
+<!-- -->
+      </div>
+    </div>
+  </div>
+    </form>
+
+<hr>
+<button type="button" class="btn btn-primary" (click)="handelSubmit(form.value);form.reset()">Add More +</button>
+
+
+
+<button type="button" class="btn btn-light Dload">Download File</button>
+
+<button type="button" class="btn btn-dark submit" >Submit</button>
+</div>
+
+
+<!-- 
+New Form Here
+-->
+
+  
+
+  <!-- 
+
+<div [hidden]="loginhide">
+
+ <button class="btn btn-dark submit"  style='margin-right: 156px' >Submit Form</button>
+
+<div class="btn-group dropup other-btn" style="margin-left: 10px;">
+                <button type="button" class="btn btn-secondary dropdown-toggle ak-blue" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Download as
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#" (click)="exportToExcel()">Excel</a>
+
+                </div>
+
+            </div>
+
+</div>
+ -->
+
+
+
+
+<router-outlet></router-outlet>
