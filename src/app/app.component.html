@@ -102,11 +102,14 @@
 
 
 <form id="form">
-  <input type="file" multiple>
+  <input type="file" multiple (change)="fileEvent($event)">
   <p>Drag your files here or click in this area.</p>
-  <h1 id="fname">Files Name</h1>
+  <h1 id="fname">Files Name  {{filename}}</h1>
   <button type="submit">Upload</button>
 </form>
+
+
+      <div class="droppable" (change)="makeDroppable(element, callback);">Drop your files here.</div>
 
 <!-- 
     <div class="panel-heading" *ngFor="let item of files; let i=index" style="margin-top: 10px;">{{item.relativePath}}</div> -->
@@ -332,30 +335,37 @@ New Form Here
        <label for="formGroupExampleInput">Position ID*</label>
       <input type="text"
              name="positionid"
+             id="positionidid"
              [ngModel]="positionidvar"
+             required
              class="form-control" placeholder="Position ID">
+
+        <div id="positionreq" class="error"> position id required</div>
+
     </div>
     <div class="col">
        <label for="formGroupExampleInput">Effective Date*</label>
       <input type="date"
              name="effectivedate"
-
+             id="effectiveid"
              [ngModel]="effectivedatevar"
              class="form-control" placeholder="Effective Date">
+        <div id="effectivedatereq" class="error"> Date required</div>
     </div> 
     <div class="col">
        <label for="formGroupExampleInput">Status*</label>
       <input type="text"
              name="status"
-
+               id="statusid"
              [ngModel]="statusvar"
              class="form-control" placeholder="Status">
+        <div id="statusreq" class="error"> Status required</div>
     </div>
   </div>
   <br>
   <div class="row">
   <div class="col">
-<button type="button" class="btn btn-secondary next" data-toggle="collapse" data-target="#collapseTwo">Next</button>
+<button type="button" (click)="next()" class="btn btn-secondary next" data-toggle="collapse" data-target="#collapseTwo">Next</button>
     </div>   
 
   
@@ -385,7 +395,7 @@ New Form Here
        <label for="formGroupExampleInput">Legal Entity*</label>
       <input type="text"
              name="legalentity"
-
+             id="legalentityid"
              [ngModel]="legalentityvar"
              class="form-control" placeholder="Legal Entity">
     </div>
@@ -393,7 +403,7 @@ New Form Here
        <label for="formGroupExampleInput">Business Unit/SSU*</label>
       <input type="text"
              name="bussinessunit"
-
+             id="bussinessunitid"
              [ngModel]="bussinessunitvar"
              class="form-control" placeholder="Business Unit/SSU">
     </div> 
@@ -401,7 +411,7 @@ New Form Here
        <label for="formGroupExampleInput">LOB/Segment*</label>
       <input type="text"
              name="lobsegment"
-
+             id="lobsegmentid"
              [ngModel]="lobsegmentvar"class="form-control" placeholder="Business Unit/SSU">
     </div>
   </div>
@@ -411,7 +421,7 @@ New Form Here
        <label for="formGroupExampleInput">Vertical*</label>
       <input type="text"
              name="vertical"
-
+             id="verticalid"
              [ngModel]="verticalvar"
              class="form-control" placeholder="Vertical">
     </div>  
@@ -419,7 +429,7 @@ New Form Here
        <label for="formGroupExampleInput">Sub Vertical*</label>
       <input type="text"
              name="subvertival"
-
+             id="subverticalid"
              [ngModel]="subvertivalvar"
              class="form-control" placeholder="Sub Vertical">
     </div>  
@@ -427,10 +437,32 @@ New Form Here
        <label for="formGroupExampleInput">Cost Center*</label>
       <input type="text"
              name="costcenter"
-
+             id="costcenterid"
              [ngModel]="costcentervar"class="form-control" placeholder="Cost Center">
     </div>
   </div>
+
+          <div class="row">
+              <div class="col">
+                  <input type="checkbox" aria-label="Checkbox for following text input" id="compulsarytocheck" (change)="extra($event)" [checked]="false">
+                  <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Position Admin Approvel" disabled="You">
+
+              </div>
+              <div class="col">
+
+                  <div  id="choose1" >
+                  <div id="form_drag">
+                      <div class="drop-zone dropZone1" id="bulk_drop1"     style="width: 24vw;">
+                          <file-drop headertext="Drag and Drop files here"(onFileDrop)="dropped($event)"
+                                     (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+
+                          </file-drop>
+                      </div>
+                  </div>
+              </div>
+              </div>
+
+          </div>
 
 <!--   <div class="row" >
     <div class="col">
@@ -447,7 +479,7 @@ New Form Here
 <div class="col">
 <form>
   <div class="form-group">
-  
+
     <input type="file" class="form-control-file" id="exampleFormControlFile1">
   </div>
 </form>
@@ -459,7 +491,9 @@ New Form Here
   <div class="row">
   <div class="col">
 
-<button type="button" class="btn btn-secondary next" data-toggle="collapse" data-target="#collapseThree">Next</button>
+<button (click)="next1()"
+        type="button"
+        class="btn btn-secondary next" data-toggle="collapse" data-target="#collapseThree">Next</button>
     <button type="button" class="btn btn-light back" data-toggle="collapse" data-target="#collapseOne">Back</button>
     </div>  
     
@@ -492,7 +526,7 @@ New Form Here
        <label for="formGroupExampleInput">Geozone*</label>
       <input type="text"
              name="Geozone"
-
+             id="Geozoneid"
              [ngModel]="Geozonevar"
              class="form-control" placeholder="Geozone">
     </div>
@@ -500,7 +534,7 @@ New Form Here
        <label for="formGroupExampleInput">Facility*</label>
       <input type="text"
              name="facility"
-
+             id="facilityid"
              [ngModel]="facilityvar"
              class="form-control" placeholder="Facility">
     </div>
@@ -508,7 +542,10 @@ New Form Here
    <br>
   <div class="row">
   <div class="col">
-<button type="button" class="btn btn-secondary next" data-toggle="collapse" data-target="#collapseFour">Next</button>
+<button type="button"
+        (click)="next2()"
+        class="btn btn-secondary next"
+        data-toggle="collapse" data-target="#collapseFour">Next</button>
  <button type="button" class="btn btn-light back" data-toggle="collapse" data-target="#collapseTwo">Back</button>
     </div>   
 
@@ -541,7 +578,7 @@ New Form Here
        <label for="formGroupExampleInput">Employee Class*</label>
       <input type="text"
              name="employeeclass"
-
+             id="employeeclassid"
              [ngModel]="employeeclassvar"
              class="form-control" placeholder="Employee Class">
     </div>
@@ -549,7 +586,7 @@ New Form Here
        <label for="formGroupExampleInput">Employee Type*</label>
       <input type="text"
              name="employeetype"
-
+             id="employeetypeid"
              [ngModel]="employeetypevar"
              class="form-control" placeholder="Employee Type">
     </div>
@@ -557,7 +594,10 @@ New Form Here
    <br>
   <div class="row">
   <div class="col">
-<button type="button" class="btn btn-secondary next" data-toggle="collapse" data-target="#collapseFive">Next</button>
+<button type="button"
+        class="btn btn-secondary next"
+        (click)="next3()"
+        data-toggle="collapse" data-target="#collapseFive">Next</button>
  <button type="button" class="btn btn-light back" data-toggle="collapse" data-target="#collapseThree">Back</button>
     </div>   
 
@@ -590,7 +630,7 @@ New Form Here
        <label for="formGroupExampleInput">Job Family*</label>
       <input type="text"
              name="jobfamily"
-
+             id="jobfamilyid"
              [ngModel]="jobfamilyvar"
              class="form-control" placeholder="Job Family">
     </div>
@@ -598,7 +638,7 @@ New Form Here
        <label for="formGroupExampleInput">Job Code*</label>
       <input type="text"
              name="Jobcode"
-
+             id="Jobcodeid"
              [ngModel]="Jobcodevar"
              class="form-control" placeholder="Job Code">
     </div>
@@ -609,7 +649,7 @@ New Form Here
        <label for="formGroupExampleInput">Internal Specilization*</label>
       <input type="text"
              name="internalspecilization"
-
+             id="internalspecilizationid"
              [ngModel]="internalspecilizationvar"
              class="form-control" placeholder="Internal Specilization">
     </div>
@@ -617,7 +657,7 @@ New Form Here
        <label for="formGroupExampleInput">Variable Pay Plan Type*</label>
       <input type="text"
              name="variablepaytype"
-
+             id="variablepaytypeid"
              [ngModel]="variablepaytypevar"
              class="form-control" placeholder="Variable Pay Plan Type">
     </div>
@@ -626,7 +666,7 @@ New Form Here
   <div class="row">
   <div class="col">
 
-<button type="button" class="btn btn-secondary next" data-toggle="collapse" data-target="#collapseSix">Next</button>
+<button type="button" class="btn btn-secondary next" data-toggle="collapse" data-target="#collapseSix" (click)="next4()">Next</button>
  <button type="button" class="btn btn-light back" data-toggle="collapse" data-target="#collapseFour">Back</button>
     </div>   
 
@@ -659,7 +699,7 @@ New Form Here
        <label for="formGroupExampleInput">Reporting Manager*</label>
       <input type="text"
              name="reportingmanager"
-
+             id="reportingmanagerid"
              [ngModel]="reportingmanagervar"
              class="form-control" placeholder="Reporting Manager">
     </div>
@@ -667,7 +707,7 @@ New Form Here
        <label for="formGroupExampleInput">BU HR  SPOC*</label>
       <input type="text"
              name="buhrspoc"
-
+             id="buhrspocid"
              [ngModel]="buhrspocvar"
              class="form-control" placeholder="BU HR  SPOC">
     </div>
